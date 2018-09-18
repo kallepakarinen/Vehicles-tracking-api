@@ -9,5 +9,6 @@ namespace VehiclesTrackingApi.Services
     public interface IVehicleService
     {
         List<Vehicle> GetVehicles();
+        Vehicle GetVehicleById(int id);
     }
 }

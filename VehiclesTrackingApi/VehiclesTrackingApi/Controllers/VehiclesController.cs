@@ -25,11 +25,12 @@ namespace VehiclesTrackingApi.Controllers
             return new JsonResult(vehicles);
         }
 
-        // GET api/values/5
+        // GET api/vechile/[id]
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            Vehicle vehicle = _vehicleService.GetVehicleById(id);
+            return new JsonResult(vehicle);
         }
 
         // POST api/values

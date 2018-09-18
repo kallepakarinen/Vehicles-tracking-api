@@ -9,5 +9,6 @@ namespace VehiclesTrackingApi.Repositories
     public interface IVehicleRepository
     {
         List<Vehicle> Get();
+        Vehicle Get(int id);
     }
 }

@@ -28,7 +28,7 @@ namespace VehiclesTrackingApi
         {
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
-            services.AddDbContext<Models.VehicledbContext>(options =>
+            services.AddDbContext<Models.VehiclesDbContext>(options =>
             {
                 options.UseSqlServer(Configuration["VehiclesDbConnection"]);
             });

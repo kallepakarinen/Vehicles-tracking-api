@@ -19,5 +19,9 @@ namespace VehiclesTrackingApi.Services
         {
             return _vehicleRepository.Get();
         }
+        public Vehicle GetVehicleById(int id)
+        {
+            return _vehicleRepository.Get(id);
+        }
     }
 }
