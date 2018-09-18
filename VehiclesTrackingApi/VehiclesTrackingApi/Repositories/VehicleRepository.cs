@@ -9,9 +9,9 @@ namespace VehiclesTrackingApi.Repositories
 {
     public class VehicleRepository : IVehicleRepository
     {
-        private readonly VehicledbContext _context;
+        private readonly VehiclesDbContext _context;
 
-        public VehicleRepository(VehicledbContext context)
+        public VehicleRepository(VehiclesDbContext context)
         {
             _context = context;
         }
@@ -21,5 +21,11 @@ namespace VehiclesTrackingApi.Repositories
             return _context.Vehicle.AsNoTracking().ToList();
         }
 
+        public Vehicle Get(int id)
+        {
+            return _context.Vehicle.AsNoTracking().FirstOrDefault(v => v.Id == id);
+        }
+     
+   
     }
 }

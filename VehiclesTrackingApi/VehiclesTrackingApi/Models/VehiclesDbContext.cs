@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace VehiclesTrackingApi.Models
 {
-    public partial class VehicledbContext : DbContext
+    public partial class VehiclesDbContext : DbContext
     {
-        public VehicledbContext()
+        public VehiclesDbContext()
         {
         }
 
-        public VehicledbContext(DbContextOptions<VehicledbContext> options)
+        public VehiclesDbContext(DbContextOptions<VehiclesDbContext> options)
             : base(options)
         {
         }
