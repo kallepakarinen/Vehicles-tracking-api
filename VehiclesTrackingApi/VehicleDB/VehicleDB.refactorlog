@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="3ff9774a-ecb1-47f4-9cb3-a943aa09aac6" ChangeDateTime="09/18/2018 06:45:01">
+    <Property Name="ElementName" Value="[dbo].[FK_Payment_ToTable]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[Payment]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_Payment_ToVehicle]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9bffa499-613b-4804-afd2-c1892590fef9" ChangeDateTime="09/18/2018 07:12:27">
+    <Property Name="ElementName" Value="[dbo].[Vehicle].[prise]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Vehicle]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="price" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d837c6dc-d96b-496a-903f-74f1da04fbdc" ChangeDateTime="09/18/2018 07:16:37">
+    <Property Name="ElementName" Value="[dbo].[Payment].[VehicleId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Payment]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="vehicleId" />
+  </Operation>
+</Operations>
