@@ -25,7 +25,7 @@ namespace VehiclesTrackingApi.Controllers
             return new JsonResult(vehicles);
         }
 
-        // GET api/vechile/[id]
+        // GET api/vechiles/{id}
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -33,22 +33,20 @@ namespace VehiclesTrackingApi.Controllers
             return new JsonResult(vehicle);
         }
 
-        // POST api/values
+        // Post api/vehicles
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Create([FromBody] Vehicle vehicle)
         {
+            Vehicle createdVehicle = _vehicleService.CreateVehicle(vehicle);
+            return new JsonResult(createdVehicle);
         }
 
-        // PUT api/values/5
+        // Put api/vehicles
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Update(int id,[FromBody] Vehicle vehicle)
         {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            Vehicle updateVehicle = _vehicleService.UpdateVehicle(id, vehicle);
+            return new JsonResult(updateVehicle);
         }
     }
 }

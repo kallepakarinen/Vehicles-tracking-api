@@ -10,5 +10,7 @@ namespace VehiclesTrackingApi.Services
     {
         List<Vehicle> GetVehicles();
         Vehicle GetVehicleById(int id);
+        Vehicle CreateVehicle(Vehicle vehicle);
+        Vehicle UpdateVehicle(int id, Vehicle vehicle);
     }
 }

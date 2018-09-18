@@ -23,5 +23,21 @@ namespace VehiclesTrackingApi.Services
         {
             return _vehicleRepository.Get(id);
         }
+        public Vehicle CreateVehicle(Vehicle vehicle)
+        {
+            return _vehicleRepository.Create(vehicle);
+        }
+        public Vehicle UpdateVehicle(int id, Vehicle vehicle)
+        {
+            var savedVehicle = _vehicleRepository.Get(id);
+            if (savedVehicle == null)
+            {
+                throw new Exception("Vehicle not found");
+            }
+            else
+            {
+                return _vehicleRepository.Update(vehicle);
+            }
+        }
     }
 }

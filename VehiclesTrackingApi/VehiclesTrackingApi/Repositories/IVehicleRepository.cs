@@ -10,5 +10,7 @@ namespace VehiclesTrackingApi.Repositories
     {
         List<Vehicle> Get();
         Vehicle Get(int id);
+        Vehicle Create(Vehicle vehicle);
+        Vehicle Update(Vehicle vehicle);
     }
 }
