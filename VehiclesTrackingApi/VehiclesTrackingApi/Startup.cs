@@ -4,10 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using VehiclesTrackingApi.Repositories;
+using VehiclesTrackingApi.Services;
 
 namespace VehiclesTrackingApi
 {
@@ -23,6 +26,12 @@ namespace VehiclesTrackingApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddDbContext<Models.VehicledbContext>(options =>
+            {
+                options.UseSqlServer(Configuration["VehiclesDbConnection"]);
+            });
             services.AddMvc();
         }
 
