@@ -1,0 +1,1 @@
+﻿{"ContextClassName":"VehicledbContext","DefaultDacpacSchema":null,"IdReplace":false,"IncludeConnectionString":true,"OutputPath":"Models","ProjectRootNamespace":"VehiclesTrackingApi","SelectedToBeGenerated":0,"Tables":["dbo.Payment","dbo.Vehicle"],"UseDatabaseNames":false,"UseFluentApiOnly":false,"UseHandleBars":false,"UseInflector":false}
