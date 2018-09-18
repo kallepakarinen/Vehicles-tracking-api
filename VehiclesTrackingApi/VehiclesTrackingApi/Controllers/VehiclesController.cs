@@ -3,17 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using VehiclesTrackingApi.Models;
+using VehiclesTrackingApi.Services;
 
 namespace VehiclesTrackingApi.Controllers
 {
     [Route("api/[controller]")]
     public class VehiclesController : Controller
     {
+        private readonly IVehicleService _vehicleService;
+        public VehiclesController(IVehicleService vehicleService)
+        {
+            _vehicleService = vehicleService;
+        }
+
         // GET api/vehicles
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            List<Vehicle> vehicles = _vehicleService.GetVehicles();
+            return new JsonResult(vehicles);
         }
 
         // GET api/values/5
