@@ -34,6 +34,8 @@ namespace VehiclesTrackingApi
             {
                 options.UseSqlServer(Configuration["VehiclesDbConnection"]);
             });
+            services.AddCors(options => options.AddPolicy("AllowAnyPolicy",
+              Builder => { Builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); }));
             services.AddMvc();
         }
 
@@ -44,7 +46,7 @@ namespace VehiclesTrackingApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors("AllowAnyPolicy");
             app.UseMvc();
         }
     }

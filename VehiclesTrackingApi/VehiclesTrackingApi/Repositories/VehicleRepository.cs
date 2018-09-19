@@ -25,12 +25,14 @@ namespace VehiclesTrackingApi.Repositories
         {
             return _context.Vehicle.AsNoTracking().FirstOrDefault(v => v.Id == id);
         }
+
         public Vehicle Create(Vehicle vehicle)
         {
             _context.Vehicle.Add(vehicle);
             _context.SaveChanges();
             return vehicle;
         }
+
         public Vehicle Update(Vehicle vehicle)
         {
             _context.Vehicle.Update(vehicle);
