@@ -45,5 +45,12 @@ namespace VehiclesTrackingApi.Controllers
             Payment updatePayment = _paymentService.UpdatePayment(id, payment);
             return new JsonResult(updatePayment);
         }
+        // Delete api/payments/{id}
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _paymentService.DeletePayment(id);
+            return new OkResult();
+        }
     }
 }

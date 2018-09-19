@@ -12,5 +12,6 @@ namespace VehiclesTrackingApi.Repositories
         Payment Get(int id);
         Payment Create(Payment payment);
         Payment Update(Payment payment);
+        void Delete(int id);
     }
 }

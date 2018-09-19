@@ -35,6 +35,13 @@ namespace VehiclesTrackingApi.Repositories
             _context.SaveChanges();
             return payment;
         }
-
+        public void Delete(int id)
+        {
+            var payment = Get(id);
+            _context.Payment.Remove(payment);
+            _context.SaveChanges();
+            return;
+        }
+      
     }
 }

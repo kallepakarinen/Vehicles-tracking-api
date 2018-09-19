@@ -38,5 +38,9 @@ namespace VehiclesTrackingApi.Services
                 return _paymentRepository.Update(payment);
             }
         }
+        public void DeletePayment(int id)
+        {
+            _paymentRepository.Delete(id);
+        }
     }
 }
