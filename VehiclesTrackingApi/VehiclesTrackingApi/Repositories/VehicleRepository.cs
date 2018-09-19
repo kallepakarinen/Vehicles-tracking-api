@@ -9,9 +9,9 @@ namespace VehiclesTrackingApi.Repositories
 {
     public class VehicleRepository : IVehicleRepository
     {
-        private readonly VehiclesDbContext _context;
+        private readonly VehicleDbContext _context;
 
-        public VehicleRepository(VehiclesDbContext context)
+        public VehicleRepository(VehicleDbContext context)
         {
             _context = context;
         }

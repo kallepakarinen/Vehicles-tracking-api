@@ -9,9 +9,9 @@ namespace VehiclesTrackingApi.Repositories
 {
     public class PaymentRepository : IPaymentRepository
     {
-        private readonly VehiclesDbContext _context;
+        private readonly VehicleDbContext _context;
 
-        public PaymentRepository(VehiclesDbContext context)
+        public PaymentRepository(VehicleDbContext context)
         {
             _context = context;
         }
