@@ -52,5 +52,12 @@ namespace VehiclesTrackingApi.Controllers
             _paymentService.DeletePayment(id);
             return new OkResult();
         }
+
+        [HttpGet("report")]
+        public IActionResult GetReport()
+        {
+            List<PaymentsReport> payments = _paymentService.GetReport();
+            return new JsonResult(payments);
+        }
     }
 }

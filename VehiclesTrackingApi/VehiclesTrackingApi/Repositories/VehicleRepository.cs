@@ -26,6 +26,12 @@ namespace VehiclesTrackingApi.Repositories
             return _context.Vehicle.AsNoTracking().FirstOrDefault(v => v.Id == id);
         }
 
+        public List<Payment> GetPayments(int id)
+        {
+            var result = _context.Payment.Where(p => p.VehicleId == id).AsNoTracking().ToList();
+            return result;
+        }
+
         public Vehicle Create(Vehicle vehicle)
         {
             _context.Vehicle.Add(vehicle);

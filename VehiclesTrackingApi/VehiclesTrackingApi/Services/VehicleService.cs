@@ -21,6 +21,11 @@ namespace VehiclesTrackingApi.Services
             return _vehicleRepository.Get();
         }
 
+        public List<Payment> GetPayments(int id)
+        {
+            return _vehicleRepository.GetPayments(id);
+        }
+
         public Vehicle GetVehicleById(int id)
         {
             return _vehicleRepository.Get(id);

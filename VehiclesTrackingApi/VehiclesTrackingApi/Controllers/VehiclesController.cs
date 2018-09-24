@@ -33,6 +33,14 @@ namespace VehiclesTrackingApi.Controllers
             return new JsonResult(vehicle);
         }
 
+        // GET api/vehicles/{id}/payments
+        [HttpGet("{id}/payments")]
+        public IActionResult GetPayments(int id)
+        {
+            List<Payment> payments = _vehicleService.GetPayments(id);
+            return new JsonResult(payments);
+        }
+
         // Post api/vehicles
         [HttpPost]
         public IActionResult Create([FromBody] Vehicle vehicle)
