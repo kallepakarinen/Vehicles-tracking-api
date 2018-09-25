@@ -23,9 +23,11 @@ namespace VehiclesTrackingApi.Models
 
     public class PaymentQuartal {
         [JsonProperty("Quartal")]
-        int Quartal;
+        public int Quartal;
         [JsonProperty("Sum")]
-        decimal? QuartalSum;
+        public decimal? QuartalSum;
+
+        public PaymentQuartal() { }
 
         public PaymentQuartal(int quartal, decimal? quartalSum)
         {
