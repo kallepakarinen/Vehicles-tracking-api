@@ -53,10 +53,10 @@ namespace VehiclesTrackingApi.Controllers
             return new OkResult();
         }
 
-        [HttpGet("report")]
-        public IActionResult GetReport()
+        [HttpGet("report/{year}")]
+        public IActionResult GetReport(int year)
         {
-            List<PaymentsReport> payments = _paymentService.GetReport();
+            List<PaymentsReport> payments = _paymentService.GetReport(year);
             return new JsonResult(payments);
         }
     }

@@ -9,7 +9,7 @@ namespace VehiclesTrackingApi.Services
     public interface IPaymentService
     {
         List<Payment> GetPayments();
-        List<PaymentsReport> GetReport();
+        List<PaymentsReport> GetReport(int year);
         Payment GetPaymentById(int id);
         Payment CreatePayment(Payment payment);
         Payment UpdatePayment(int id, Payment payment);

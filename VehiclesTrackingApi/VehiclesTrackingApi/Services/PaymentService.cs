@@ -23,32 +23,25 @@ namespace VehiclesTrackingApi.Services
             return _paymentRepository.Get();
         }
 
-        public List<PaymentsReport> GetReport()
+        public List<PaymentsReport> GetReport(int year)
         {
-            // Test
-            // return _paymentRepository.GetReport(new PaymentsReport());
-
+        
             // Get vehicles, using vehicle service or vehicle repository to get data
             List<PaymentsReport> paymentsReport = new List<PaymentsReport>();
    
             var vehicles = _vehicleService.GetVehicles();
             var payments = _paymentRepository.Get();
-
-          
-
+            var paymentsYear = year;
             foreach (var vehicle in vehicles)
             {          
                 var reportItem = new PaymentsReport();
                 reportItem.VehicleId = vehicle.Id;
-                reportItem.VehicleName = vehicle.Registration;
-
-               
-              
+                reportItem.VehicleName = vehicle.Registration + ' ' +  vehicle.Mark;
+                         
                 // Get payments by vehicle id
-                var vehiclePayments = payments.Where(p => p.VehicleId == vehicle.Id).ToList();
+                var vehiclePayments = payments.Where(p => p.VehicleId == vehicle.Id && p.Day.Year == paymentsYear).ToList();
 
-                // Filter by Fuel, group by quartal
-
+                // Filter by Payments, group by quartal
                 var vehicleFuelPayments = vehiclePayments.Where(p => p.Fuel != null);
                 var vehicleServicePayments = vehiclePayments.Where(p => p.Service != null);
                 var vehiclePartsPayments = vehiclePayments.Where(p => p.Parts != null);
@@ -63,52 +56,41 @@ namespace VehiclesTrackingApi.Services
 
                 reportItem.Fuel = new List<PaymentQuartal>();
                 reportItem.Service = new List<PaymentQuartal>();
-                var helpList = new List<PaymentQuartal>();
-                // Total
+                var collectionList = new List<PaymentQuartal>();
+                
                 reportItem.QuarterlySum = new List<PaymentQuartal>();
               
                 foreach(var p in vehicleQuarterlyFuelPayments)
                 {
                     reportItem.Fuel.Add(p);
-                    helpList.Add(p);
+                    collectionList.Add(p);
                 }
 
                 foreach (var p in vehicleQuarterlyServicePayments)
                 {
                     reportItem.Service.Add(p);
-                    helpList.Add(p);
-
+                    collectionList.Add(p);
                 }
-                // Repeat for other payment types
-                // double a = reportItem.QuarterlySum.Where(q => q.Quartal == 1).Sum(s => s.sum);
-                //   reportItem.QuarterlySum.Add(reportItem.Fuel + reportItem.Service);
-               
-                //var x = helpList.Find(i=>i.q)
-              // reportListItem.QuartalSum = helpList.Where(a => a.Quartal == 3).ToList();
+            
+               // Sum payments per quartal
               for(int i = 1; i <=4; i++)
                 {
                     var reportListItem = new PaymentQuartal();
-                    reportListItem.QuartalSum = helpList.Where(a => a.Quartal == i).Sum(s=>s.QuartalSum);
+                    reportListItem.QuartalSum = collectionList.Where(a => a.Quartal == i).Sum(s=>s.QuartalSum);
                     reportListItem.Quartal = i;
                     reportItem.QuarterlySum.Add(reportListItem);               
                 }
-
-                reportItem.YearlySum = helpList.Sum(s => s.QuartalSum);
-                //   Sum(i => i.QuartalSum)
-               
-                  
-                paymentsReport.Add(reportItem);
-             
-               // var x = helpList;
-              //  test = paymentsReport.Where(i => i.Fuel == ));
+                
+                // Payments per year
+                reportItem.YearlySum = collectionList.Sum(s => s.QuartalSum);
+                          
+                // Adding assorted items
+                paymentsReport.Add(reportItem);                     
             }
 
             // Return report
             return paymentsReport;
         }
-
-
-
 
         public Payment GetPaymentById(int id)
         {
