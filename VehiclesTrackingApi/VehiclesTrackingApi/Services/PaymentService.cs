@@ -32,6 +32,7 @@ namespace VehiclesTrackingApi.Services
             var vehicles = _vehicleService.GetVehicles();
             var payments = _paymentRepository.Get();
             var paymentsYear = year;
+
             foreach (var vehicle in vehicles)
             {          
                 var reportItem = new PaymentsReport();
@@ -39,7 +40,11 @@ namespace VehiclesTrackingApi.Services
                 reportItem.VehicleName = vehicle.Registration + ' ' +  vehicle.Mark;
                          
                 // Get payments by vehicle id
+
+                // 1 = all           
                 var vehiclePayments = payments.Where(p => p.VehicleId == vehicle.Id && p.Day.Year == paymentsYear).ToList();
+                
+               // var vehiclePayments = payments.Where(p => p.VehicleId == vehicle.Id && p.Day.Year == paymentsYear).ToList();
 
                 // Filter by Payments, group by quartal
                 var vehicleFuelPayments = vehiclePayments.Where(p => p.Fuel != null);
@@ -54,8 +59,20 @@ namespace VehiclesTrackingApi.Services
                 var vehicleQuarterlyServicePayments = vehicleServicePayments.GroupBy(item => ((item.Day.Month - 1) / 3),
                     (key, group) => new PaymentQuartal(key + 1, group.Sum(p => p.Service))).ToList();
 
+                var vehicleQuarterlyPartsPayments = vehiclePartsPayments.GroupBy(item => ((item.Day.Month - 1) / 3),
+                    (key, group) => new PaymentQuartal(key + 1, group.Sum(p => p.Parts))).ToList();
+
+                var vehicleQuarterlyInsurancePayments = vehicleInsurancePayments.GroupBy(item => ((item.Day.Month - 1) / 3),
+                    (key, group) => new PaymentQuartal(key + 1, group.Sum(p => p.Insurance))).ToList();
+
+                var vehicleQuarterlyTaxPayments = vehicleTaxPayments.GroupBy(item => ((item.Day.Month - 1) / 3),
+                (key, group) => new PaymentQuartal(key + 1, group.Sum(p => p.Tax))).ToList();
+
                 reportItem.Fuel = new List<PaymentQuartal>();
                 reportItem.Service = new List<PaymentQuartal>();
+                reportItem.Parts = new List<PaymentQuartal>();
+                reportItem.Insurance = new List<PaymentQuartal>();
+                reportItem.Tax = new List<PaymentQuartal>();
                 var collectionList = new List<PaymentQuartal>();
                 
                 reportItem.QuarterlySum = new List<PaymentQuartal>();
@@ -71,9 +88,25 @@ namespace VehiclesTrackingApi.Services
                     reportItem.Service.Add(p);
                     collectionList.Add(p);
                 }
-            
-               // Sum payments per quartal
-              for(int i = 1; i <=4; i++)
+
+                foreach (var p in vehicleQuarterlyPartsPayments)
+                {
+                    reportItem.Parts.Add(p);
+                    collectionList.Add(p);
+                }
+                foreach (var p in vehicleQuarterlyInsurancePayments)
+                {
+                    reportItem.Insurance.Add(p);
+                    collectionList.Add(p);
+                }
+                foreach (var p in vehicleQuarterlyTaxPayments)
+                {
+                    reportItem.Tax.Add(p);
+                    collectionList.Add(p);
+                }
+
+                // Sum payments per quartal
+                for (int i = 1; i <=4; i++)
                 {
                     var reportListItem = new PaymentQuartal();
                     reportListItem.QuartalSum = collectionList.Where(a => a.Quartal == i).Sum(s=>s.QuartalSum);
