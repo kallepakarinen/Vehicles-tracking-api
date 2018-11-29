@@ -10,7 +10,7 @@ namespace VehiclesTrackingApi.Models
     {
         public int VehicleId { get; set; }
         public string VehicleName { get; set; }
-        [JsonProperty("Fuel")]
+      //  [JsonProperty("Fuel")]
         public List<PaymentQuartal> Fuel { get; set; }
         public List<PaymentQuartal> Service { get; set; }
         public List<PaymentQuartal> Parts { get; set; }
