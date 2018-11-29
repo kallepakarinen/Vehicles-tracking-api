@@ -28,10 +28,14 @@ namespace VehiclesTrackingApi
         {
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
-            services.AddDbContext<Models.VehiclesDbContext>(options =>
+            services.AddScoped<IPaymentService, PaymentService>();   
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
+            services.AddDbContext<Models.VehicleDbContext>(options =>
             {
                 options.UseSqlServer(Configuration["VehiclesDbConnection"]);
             });
+            services.AddCors(options => options.AddPolicy("AllowAnyPolicy",
+              Builder => { Builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); }));
             services.AddMvc();
         }
 
@@ -42,7 +46,7 @@ namespace VehiclesTrackingApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors("AllowAnyPolicy");
             app.UseMvc();
         }
     }

@@ -15,18 +15,27 @@ namespace VehiclesTrackingApi.Services
         {
             _vehicleRepository = VehicleRepository;
         }
+
            public List<Vehicle> GetVehicles()
         {
             return _vehicleRepository.Get();
         }
+
+        public List<Payment> GetPayments(int id)
+        {
+            return _vehicleRepository.GetPayments(id);
+        }
+
         public Vehicle GetVehicleById(int id)
         {
             return _vehicleRepository.Get(id);
         }
+
         public Vehicle CreateVehicle(Vehicle vehicle)
         {
             return _vehicleRepository.Create(vehicle);
         }
+
         public Vehicle UpdateVehicle(int id, Vehicle vehicle)
         {
             var savedVehicle = _vehicleRepository.Get(id);
